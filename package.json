@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "main": "src/gym-campaign.js",
   "scripts": {
-    "preinstall": "npm i --save-dev typings typescript",
-    "postinstall": "typings install && tsc",
+    "preinstall": "typings install",
+    "postinstall": "tsc",
     "start": "node index",
     "watch": "gulp",
     "dev": "tsc && concurrently \"npm start\" \"gulp\"",
