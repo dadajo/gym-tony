@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "main": "src/gym-campaign.js",
   "scripts": {
-    "preinstall": "rm -rf node_modules && rm -rf typings && npm i --save-dev typings typescript",
+    "preinstall": "npm i --save-dev typings typescript",
     "postinstall": "typings install && tsc",
     "start": "node index",
     "watch": "gulp",
