@@ -1,1 +1,51 @@
-"use strict";var __decorate=this&&this.__decorate||function(t,e,r,o){var n,c=arguments.length,a=c<3?e:null===o?o=Object.getOwnPropertyDescriptor(e,r):o;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)a=Reflect.decorate(t,e,r,o);else for(var i=t.length-1;i>=0;i--)(n=t[i])&&(a=(c<3?n(a):c>3?n(e,r,a):n(e,r))||a);return c>3&&a&&Object.defineProperty(e,r,a),a},__metadata=this&&this.__metadata||function(t,e){if("object"==typeof Reflect&&"function"==typeof Reflect.metadata)return Reflect.metadata(t,e)},core_1=require("@angular/core"),router_1=require("@angular/router"),GymCmp=function(){function t(t){this.route=t}return t.prototype.ngOnInit=function(){this.sub=this.route.params.map(function(t){return t.id}).subscribe(function(t){t?console.log("gym/:id =>  "+t):console.log("gym =>  sin id")})},t.prototype.ngOnDestroy=function(){this.sub.unsubscribe()},t=__decorate([core_1.Component({selector:"gym",templateUrl:"gym/templates/gym.html",styleUrls:["gym/styles/gym.css"]}),__metadata("design:paramtypes",[router_1.ActivatedRoute])],t)}();exports.GymCmp=GymCmp;
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
+var GymCmp = (function () {
+    function GymCmp(route) {
+        this.route = route;
+    }
+    GymCmp.prototype.ngOnInit = function () {
+        // Obtenemos el id del curso pasado por la url
+        /*
+        this.route.params.subscribe(
+            params => {
+                
+                this.id = +params['id'];
+
+                console.log(this.id);
+            }
+        )
+        */
+        this.sub = this.route.params
+            .map(function (params) { return params['id']; })
+            .subscribe(function (id) {
+            if (id)
+                console.log('gym/:id =>  ' + id);
+            else
+                console.log('gym =>  sin id');
+        });
+    };
+    GymCmp.prototype.ngOnDestroy = function () {
+        this.sub.unsubscribe();
+    };
+    GymCmp = __decorate([
+        core_1.Component({
+            selector: 'gym',
+            templateUrl: 'gym/templates/gym.html',
+            styleUrls: ['gym/styles/gym.css']
+        }), 
+        __metadata('design:paramtypes', [router_1.ActivatedRoute])
+    ], GymCmp);
+    return GymCmp;
+}());
+exports.GymCmp = GymCmp;
