@@ -1,0 +1,1 @@
+"use strict";var GymService=function(){function e(){}return e.prototype.doStuff=function(){return 1},e}();exports.GymService=GymService;

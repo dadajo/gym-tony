@@ -1,0 +1,12 @@
+{
+  "generator-ng-fullstack": {
+    "username": "dadajo",
+    "appName": "gym-campaign",
+    "stack": "fullstack",
+    "server": "node",
+    "client": "ng2",
+    "transpilerServer": "node",
+    "secure": false,
+    "differentStaticServer": true
+  }
+}

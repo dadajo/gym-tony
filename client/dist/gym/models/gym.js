@@ -1,0 +1,1 @@
+"use strict";var MyModel=function(){function t(){}return t.prototype.doStuff=function(){return 1},t}();exports.MyModel=MyModel;

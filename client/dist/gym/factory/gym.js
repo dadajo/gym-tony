@@ -1,0 +1,1 @@
+"use strict";var MyFactory=function(){function t(){}return t.prototype.doSomething=function(){},t}();exports.MyFactory=MyFactory;
