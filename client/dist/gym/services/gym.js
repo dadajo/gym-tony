@@ -1,10 +1,1 @@
-"use strict";
-var GymService = (function () {
-    function GymService() {
-    }
-    GymService.prototype.doStuff = function () {
-        return 1;
-    };
-    return GymService;
-}());
-exports.GymService = GymService;
+"use strict";var __decorate=this&&this.__decorate||function(t,e,r,a){var n,o=arguments.length,c=o<3?e:null===a?a=Object.getOwnPropertyDescriptor(e,r):a;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)c=Reflect.decorate(t,e,r,a);else for(var i=t.length-1;i>=0;i--)(n=t[i])&&(c=(o<3?n(c):o>3?n(e,r,c):n(e,r))||c);return o>3&&c&&Object.defineProperty(e,r,c),c},__metadata=this&&this.__metadata||function(t,e){if("object"==typeof Reflect&&"function"==typeof Reflect.metadata)return Reflect.metadata(t,e)},__param=this&&this.__param||function(t,e){return function(r,a){e(r,a,t)}},core_1=require("@angular/core"),http_1=require("@angular/http");require("rxjs/add/operator/map");var GymService=function(){function t(t){this._http=t}return t.prototype.add=function(e){var r=new http_1.Headers;return r.append("Content-Type","application/json"),this._http.post(t.ENDPOINT.replace(":id",""),e,{headers:r}).map(function(t){return t.json()})},t.ENDPOINT="/api/user/:id",t=__decorate([core_1.Injectable(),__param(0,core_1.Inject(http_1.Http)),__metadata("design:paramtypes",[http_1.Http])],t)}();exports.GymService=GymService;

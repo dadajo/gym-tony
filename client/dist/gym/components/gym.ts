@@ -1,6 +1,8 @@
 import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
 import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
 
+import { GymService } from '../services/gym';
+
 @Component({
   selector: 'gym',
   templateUrl: 'gym/templates/gym.html',
@@ -8,29 +10,33 @@ import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
 })
 export class GymCmp implements OnInit, OnDestroy {
   
-	id: any;
+	gymId: any;
   private sub: any;
+  user: any = [];
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute
+            , private _gymService: GymService) {}
+
+  
+   add():void {
+
+     if(this.gymId){
+       this._gymService
+          .add({"user": this.user, "id": this.gymId})
+          .subscribe((resp) => {
+            console.log(resp);
+          });
+     } 
+
+  }
 
   ngOnInit(){
-		
-		// Obtenemos el id del curso pasado por la url
-		/*
-		this.route.params.subscribe(
-			params => { 
-				
-				this.id = +params['id'];
 
-				console.log(this.id);
-			}
-		)
-		*/
 		this.sub = this.route.params
       .map(params => params['id'])
       .subscribe((id) => {
         if(id)
-          console.log('gym/:id =>  '+id);
+          this.gymId = id;//console.log('gym/:id =>  '+id);
         else
           console.log('gym =>  sin id');
       });
