@@ -12,7 +12,7 @@ export class GymCmp implements OnInit, OnDestroy {
   
 	gymId: any;
   private sub: any;
-  user: any;
+  user: any = [];
 
   constructor(private route: ActivatedRoute
             , private _gymService: GymService) {}
