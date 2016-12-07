@@ -14,6 +14,7 @@ var common_1 = require('@angular/common');
 //import {APP_BASE_HREF} from '@angular/common';
 var http_1 = require('@angular/http');
 var forms_1 = require('@angular/forms');
+var ng2_validation_1 = require('ng2-validation');
 var platform_browser_1 = require('@angular/platform-browser');
 var app_routing_1 = require('./app.routing');
 var app_component_1 = require('./app.component');
@@ -30,6 +31,7 @@ var AppModule = (function () {
             imports: [
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
+                ng2_validation_1.CustomFormsModule,
                 http_1.HttpModule,
                 router_1.RouterModule.forRoot(app_routing_1.rootRouterConfig)
             ],

@@ -1,6 +1,9 @@
 "use strict";
 
 const mongoose = require('mongoose');
+const _userSchema = require('../../user-gym/model/user-model');
+const _jsonFileSchema = require('./jsonFile-model');
+const _templatesSchema = require('./templates-model');
 
 const _gymSchema = {
   id: {type: String, required: true, trim: true},

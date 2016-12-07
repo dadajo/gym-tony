@@ -20,18 +20,31 @@ gymSchema.statics.getAll = () => {
   });
 }
 
-gymSchema.statics.createNew = (gym) => {
+gymSchema.statics.createNew = (data) => {
   return new Promise((resolve, reject) => {
-    if (!_.isObject(gym)) {
-      return reject(new TypeError('Todo is not a valid object.'));
+    
+    //console.log("gymSchema.statics.createNew "+JSON.stringify(data));
+
+    if (!_.isObject(data)) {
+      return resolve({'error':'gym is not a valid object.'});
     }
 
-    let _something = new gym(gym);
+    //console.log("mrr");
+   
+    //try{
+      let _something = new gym(data);
 
-    _something.save((err, saved) => {
-      err ? reject(err)
-        : resolve(saved);
-    });
+       _something.save((err, saved) => {
+          err ? resolve(err)
+            : resolve(saved);
+        });
+    //}catch(err){
+      //console.log(err)
+    //}
+    
+    //console.log("brr");
+
+   
   });
 }
 

@@ -20,6 +20,15 @@ System.config({
     '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
 
     // other libraries
-    'rxjs':                       'npm:rxjs'
-  }
+    'rxjs':                       'npm:rxjs',
+    'ng2-validation':             'npm:ng2-validation/dist'
+  },
+    // packages tells the System loader how to load when no filename and/or no extension
+    packages: {
+      'ng2-validation': {
+        main: './index.js',
+        directives: './directives/',
+        defaultExtension: 'js'
+      }
+    }
 });

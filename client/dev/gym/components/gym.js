@@ -10,27 +10,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
+var gym_1 = require('../services/gym');
 var GymCmp = (function () {
-    function GymCmp(route) {
+    function GymCmp(route, _gymService) {
         this.route = route;
+        this._gymService = _gymService;
     }
+    GymCmp.prototype.add = function () {
+        if (this.gymId) {
+            this._gymService
+                .add({ "user": this.user, "id": this.gymId })
+                .subscribe(function (resp) {
+                console.log(resp);
+            });
+        }
+    };
     GymCmp.prototype.ngOnInit = function () {
-        // Obtenemos el id del curso pasado por la url
-        /*
-        this.route.params.subscribe(
-            params => {
-                
-                this.id = +params['id'];
-
-                console.log(this.id);
-            }
-        )
-        */
+        var _this = this;
         this.sub = this.route.params
             .map(function (params) { return params['id']; })
             .subscribe(function (id) {
             if (id)
-                console.log('gym/:id =>  ' + id);
+                _this.gymId = id; //console.log('gym/:id =>  '+id);
             else
                 console.log('gym =>  sin id');
         });
@@ -44,7 +45,7 @@ var GymCmp = (function () {
             templateUrl: 'gym/templates/gym.html',
             styleUrls: ['gym/styles/gym.css']
         }), 
-        __metadata('design:paramtypes', [router_1.ActivatedRoute])
+        __metadata('design:paramtypes', [router_1.ActivatedRoute, gym_1.GymService])
     ], GymCmp);
     return GymCmp;
 }());

@@ -1,6 +1,6 @@
 "use strict";
 
-const user = require('../dao/user-dao');
+const userDAO = require('../dao/user-dao');
 
 module.exports = class userController {
   static getAll(req, res) {

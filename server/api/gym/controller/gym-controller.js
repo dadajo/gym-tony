@@ -12,7 +12,7 @@ module.exports = class gymController {
 
   static createNew(req, res) {
     let _gym = req.body;
-
+    console.log("gymController "+_gym);
     gymDAO
       .createNew(_gym)
       .then(gym => res.status(201).json(gym))
