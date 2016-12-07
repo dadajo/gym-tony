@@ -20,10 +20,11 @@ module.exports = class gymController {
   }
 
   static upload(req, res) {
-    let _gym = req.body;
+    let _gymFile = req.file;
+    let _gymObj = req.body;
 
     gymDAO
-      .upload(_gym)
+      .upload(_gymFile, _gymObj)
       .then(gym => res.status(201).json(gym))
       .catch(error => res.status(400).json(error));
   }

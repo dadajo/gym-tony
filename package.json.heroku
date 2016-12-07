@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "main": "src/gym-campaign.js",
   "scripts": {
-    "preinstall": "typings install",
-    "postinstall": "tsc",
+    "preinstall": "npm i --save-dev typings typescript",
+    "postinstall": "typings install && tsc",
     "start": "node index",
     "watch": "gulp",
     "dev": "tsc && concurrently \"npm start\" \"gulp\"",
@@ -34,6 +34,7 @@
     "lodash": "^4.6.1",
     "mongoose": "^4.4.7",
     "morgan": "^1.5.2",
+    "multer": "^1.2.0",
     "newrelic": "^1.18.2",
     "reflect-metadata": "^0.1.3",
     "rxjs": "^5.0.0-beta.12",

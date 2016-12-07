@@ -1,5 +1,7 @@
 "use strict";
+const multer  = require('multer')
 
+const upload = multer({ dest: 'uploads/' })
 const gymController = require('../controller/gym-controller');
 
 module.exports = class gymRoutes {
@@ -10,7 +12,7 @@ module.exports = class gymRoutes {
       .post(gymController.createNew);
     router
       .route('/api/gym/upload')
-      .post(gymController.upload);
+      .post(upload.single('file'), gymController.upload);
 
     router
       .route('/api/gym/:id')

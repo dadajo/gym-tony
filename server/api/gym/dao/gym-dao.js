@@ -3,6 +3,8 @@
 const mongoose = require('mongoose');
 const Promise = require('bluebird');
 const gymSchema = require('../model/gym-model');
+const jsonFileSchema = require('../model/jsonFile-model');
+const templatesSchema = require('../model/templates-model');
 const _ = require('lodash');
 
 gymSchema.statics.getAll = () => {
@@ -33,23 +35,23 @@ gymSchema.statics.createNew = (gym) => {
   });
 }
 
-gymSchema.statics.upload = (file) => {
-    var sampleFile;
+gymSchema.statics.upload = (file, data) => {
+  return new Promise((resolve, reject) => {
+    console.log(data);
 
-    if (!req.files) {
-        res.send('No files were uploaded.');
-        return;
+    if (!file) {
+        console.log(file);
+        return reject(new TypeError('No file'))//resolve({"status":"mrr"});
     }
+    console.log(file);
 
-    sampleFile = req.files.sampleFile;
-    sampleFile.mv('/somewhere/on/your/server/filename.jpg', (err) => {
-        if (err) {
-            res.status(500).send(err);
-        }
-        else {
-            res.send('File uploaded!');
-        }
+    let _file = new jsonFile({name: file.filename, ubicated: file.path});
+
+    _file.save((err, saved) => {
+      err ? reject(err)
+        : resolve({"data":saved,"error": 0});
     });
+  });//end promise
 }
 
 gymSchema.statics.removeById = (id) => {
@@ -68,5 +70,7 @@ gymSchema.statics.removeById = (id) => {
 }
 
 const gym = mongoose.model('gym', gymSchema);
+const jsonFile = mongoose.model('jsonFile', jsonFileSchema);
+const templates = mongoose.model('templates', templatesSchema);
 
 module.exports = gym;
