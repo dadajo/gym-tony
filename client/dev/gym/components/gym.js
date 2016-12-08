@@ -15,7 +15,7 @@ var GymCmp = (function () {
     function GymCmp(route, _gymService) {
         this.route = route;
         this._gymService = _gymService;
-        this.user = [];
+        this.user = { id: undefined, email: undefined };
     }
     GymCmp.prototype.add = function () {
         if (this.gymId) {

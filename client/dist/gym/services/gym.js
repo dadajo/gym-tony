@@ -1,1 +1,36 @@
-"use strict";var __decorate=this&&this.__decorate||function(t,e,r,a){var n,o=arguments.length,c=o<3?e:null===a?a=Object.getOwnPropertyDescriptor(e,r):a;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)c=Reflect.decorate(t,e,r,a);else for(var i=t.length-1;i>=0;i--)(n=t[i])&&(c=(o<3?n(c):o>3?n(e,r,c):n(e,r))||c);return o>3&&c&&Object.defineProperty(e,r,c),c},__metadata=this&&this.__metadata||function(t,e){if("object"==typeof Reflect&&"function"==typeof Reflect.metadata)return Reflect.metadata(t,e)},__param=this&&this.__param||function(t,e){return function(r,a){e(r,a,t)}},core_1=require("@angular/core"),http_1=require("@angular/http");require("rxjs/add/operator/map");var GymService=function(){function t(t){this._http=t}return t.prototype.add=function(e){var r=new http_1.Headers;return r.append("Content-Type","application/json"),this._http.post(t.ENDPOINT.replace(":id",""),e,{headers:r}).map(function(t){return t.json()})},t.ENDPOINT="/api/user/:id",t=__decorate([core_1.Injectable(),__param(0,core_1.Inject(http_1.Http)),__metadata("design:paramtypes",[http_1.Http])],t)}();exports.GymService=GymService;
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var core_1 = require('@angular/core');
+var http_1 = require('@angular/http');
+require('rxjs/add/operator/map');
+var GymService = (function () {
+    function GymService(_http) {
+        this._http = _http;
+    }
+    GymService.prototype.add = function (user) {
+        var headers = new http_1.Headers();
+        headers.append('Content-Type', 'application/json');
+        return this._http
+            .post(GymService.ENDPOINT.replace(':id', ''), user, { headers: headers })
+            .map(function (r) { return r.json(); });
+    };
+    GymService.ENDPOINT = '/api/user/:id';
+    GymService = __decorate([
+        core_1.Injectable(),
+        __param(0, core_1.Inject(http_1.Http)), 
+        __metadata('design:paramtypes', [http_1.Http])
+    ], GymService);
+    return GymService;
+}());
+exports.GymService = GymService;

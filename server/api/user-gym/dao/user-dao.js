@@ -5,6 +5,8 @@ const Promise = require('bluebird');
 const userSchema = require('../model/user-model');
 const _ = require('lodash');
 
+const _gym = require('../../gym/dao/gym-dao');
+
 userSchema.statics.getAll = () => {
   return new Promise((resolve, reject) => {
     let _query = {};
@@ -18,18 +20,41 @@ userSchema.statics.getAll = () => {
   });
 }
 
-userSchema.statics.createNew = (user) => {
+userSchema.statics.createNew = (params) => {
   return new Promise((resolve, reject) => {
-    if (!_.isObject(user)) {
+    if (!_.isObject(params)) {
+      console.log("NOt OBJECT ERROR");
       return reject(new TypeError('Todo is not a valid object.'));
     }
-
-    let _something = new user(user);
+    
+    /*
+    let _something = new user(params.user);
 
     _something.save((err, saved) => {
-      err ? reject(err)
-        : resolve(saved);
+      if(err) reject(err)
+        
+      resolve(saved);
+
+      userLinkToGym(params.id, saved);
     });
+    */
+    console.log("BEFORE findOneAndUpdate "+JSON.stringify(params));
+    
+    user.findOneAndUpdate(
+        params.user.email,
+        params.user,
+        //{ $push: { replies: reply } },
+        { upsert: true }, // upsert looks to find a Message with that id and if it doesn't exist creates the Message 
+        (err, saved) => {
+             if(err) reject(err)
+              
+              console.log("ONTO findOneAndUpdate "+JSON.stringify(saved));
+              
+              resolve(saved);
+
+              userLinkToGym(params.id, saved);
+    });
+
   });
 }
 
@@ -46,6 +71,24 @@ userSchema.statics.removeById = (id) => {
           : resolve();
       });
   });
+}
+
+function userLinkToGym(id, params) {
+   _gym.findOneAndUpdate(
+        id,
+        //params.user,
+        { $addToSet: { users: params } },
+        //{ upsert: true }, // upsert looks to find a Message with that id and if it doesn't exist creates the Message 
+        (err, saved) => {
+             if(err) reject(err)
+
+             console.log("ONTO  _gym.findOneAndUpdate " + JSON.stringify(params));
+             //params.gyms.push(saved);
+             //params.save();          
+             //params.$addToSet({ gyms: saved});
+             params.gyms.addToSet(saved);   
+             params.save();
+    });
 }
 
 const user = mongoose.model('user', userSchema);

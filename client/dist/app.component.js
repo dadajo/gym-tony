@@ -1,1 +1,26 @@
-"use strict";var __decorate=this&&this.__decorate||function(e,t,o,n){var r,a=arguments.length,c=a<3?t:null===n?n=Object.getOwnPropertyDescriptor(t,o):n;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)c=Reflect.decorate(e,t,o,n);else for(var p=e.length-1;p>=0;p--)(r=e[p])&&(c=(a<3?r(c):a>3?r(t,o,c):r(t,o))||c);return a>3&&c&&Object.defineProperty(t,o,c),c},__metadata=this&&this.__metadata||function(e,t){if("object"==typeof Reflect&&"function"==typeof Reflect.metadata)return Reflect.metadata(e,t)},core_1=require("@angular/core"),AppComponent=function(){function e(e){this.viewContainerRef=e}return e=__decorate([core_1.Component({selector:"gym-app",templateUrl:"app.component.html"}),__metadata("design:paramtypes",[core_1.ViewContainerRef])],e)}();exports.AppComponent=AppComponent;
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = require('@angular/core');
+var AppComponent = (function () {
+    function AppComponent(viewContainerRef) {
+        // You need this small hack in order to catch application root view container ref
+        this.viewContainerRef = viewContainerRef;
+    }
+    AppComponent = __decorate([
+        core_1.Component({
+            selector: 'gym-app',
+            templateUrl: 'app.component.html',
+        }), 
+        __metadata('design:paramtypes', [core_1.ViewContainerRef])
+    ], AppComponent);
+    return AppComponent;
+}());
+exports.AppComponent = AppComponent;

@@ -6,6 +6,7 @@ const gymSchema = require('../model/gym-model');
 const jsonFileSchema = require('../model/jsonFile-model');
 const templatesSchema = require('../model/templates-model');
 const _ = require('lodash');
+const fs =  require('fs');
 
 gymSchema.statics.getAll = () => {
   return new Promise((resolve, reject) => {
@@ -60,11 +61,24 @@ gymSchema.statics.upload = (file, data) => {
 
     let _file = new jsonFile({name: file.filename, ubicated: file.path});
 
+    
+
     _file.save((err, saved) => {
-      err ? reject(err)
-        : resolve({"data":saved,"error": 0});
+      if(err)
+        reject(err)
+        
+        resolve({"data":saved,"error": 0});
+        insertFromFile(file.path);
     });
   });//end promise
+}
+
+function insertFromFile(file) {
+  fs.readFile(file, 'utf8', (err, data) => {
+      if (err) throw err;
+      var obj = JSON.parse(data);
+      console.log(obj);
+    });
 }
 
 gymSchema.statics.removeById = (id) => {

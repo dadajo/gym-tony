@@ -9,6 +9,7 @@ const _gymSchema = {
   id: {type: String, required: true, trim: true},
   name: {type: String, required: true, trim: true},
   createdAt: {type: Date, default: Date.now},
+  headerurl: {type: String, required: true, trim: true, default: 'uploads\images\default'},
   users: [{ type: mongoose.Schema.Types.ObjectId, ref: 'user' }],
   jsonFiles: [{ type: mongoose.Schema.Types.ObjectId, ref: 'jsonFile' }],
   templates: [{ type: mongoose.Schema.Types.ObjectId, ref: 'templates' }]

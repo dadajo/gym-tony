@@ -1,6 +1,6 @@
 <div class="container">
     <img src="gym/templates/header.jpeg" class="img-header">
-    <form (ngSubmit)="add()" #demoForm="ngForm" novalidate>
+    <form (ngSubmit)="add()" #userForm="ngForm" novalidate>
       <div class="form-group">
         <label for="name">Código</label>
         <input type="text" [(ngModel)]="user.id" name="field" class="form-control" #field="ngModel" [rangeLength]="[1, 20]"/>
@@ -17,7 +17,7 @@
         <input type="email" class="form-control" id="email" required>
         -->
       </div>
-      <button type="submit" class="btn btn-success">Enviar</button>
+      <button type="submit" class="btn btn-success" [disabled]="!userForm.valid">Enviar</button>
     </form>
     <div class="panel panel-info">
       <div class="panel-heading">

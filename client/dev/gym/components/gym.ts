@@ -3,6 +3,11 @@ import { Routes, RouterModule, Router, ActivatedRoute } from '@angular/router';
 
 import { GymService } from '../services/gym';
 
+type User = {
+  id: string;
+  email: string;
+}
+
 @Component({
   selector: 'gym',
   templateUrl: 'gym/templates/gym.html',
@@ -12,7 +17,7 @@ export class GymCmp implements OnInit, OnDestroy {
   
 	gymId: any;
   private sub: any;
-  user: any = [];
+  public user: User = {id: undefined, email: undefined};
 
   constructor(private route: ActivatedRoute
             , private _gymService: GymService) {}

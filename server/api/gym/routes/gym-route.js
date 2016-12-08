@@ -1,7 +1,7 @@
 "use strict";
 const multer  = require('multer')
 
-const upload = multer({ dest: 'uploads/' })
+const upload = multer({ dest: 'uploads/databases' })
 const gymController = require('../controller/gym-controller');
 
 module.exports = class gymRoutes {
