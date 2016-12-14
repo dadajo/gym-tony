@@ -11,4 +11,6 @@ const _userSchema = {
   gyms: [{ type: mongoose.Schema.Types.ObjectId, ref: 'gym' }]
 }
 
+//, unique: true
+
 module.exports = mongoose.Schema(_userSchema);

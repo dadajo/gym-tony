@@ -19,6 +19,16 @@ module.exports = class userController {
       .catch(error => res.status(400).json(error));
   }
 
+  static upload(req, res) {
+    let _gymFile = req.file;
+    let _gymObj = req.body;
+
+    userDAO
+      .upload(_gymFile, _gymObj)
+      .then(gym => res.status(201).json(gym))
+      .catch(error => res.status(400).json(error));
+  }
+
   static removeById(req, res) {
     let _id = req.params.id;
 
