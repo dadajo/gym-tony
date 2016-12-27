@@ -108,7 +108,7 @@ function insertFromFile(file, id) {//, resolve, reject) {
           user.findOneAndUpdate(
             //{"email":_data[i].email},
             {"id":_data[i].id},
-            _data[i],
+            new user(_data[i]),
             { upsert: true },
             (err, userUpdated) => {
               if(err) console.log(err)//reject(err)
