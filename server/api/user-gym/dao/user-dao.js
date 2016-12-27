@@ -24,11 +24,11 @@ userSchema.statics.getAll = () => {
 userSchema.statics.createNew = (params) => {
   return new Promise((resolve, reject) => {
     if (!_.isObject(params)) {
-      console.log("NOt OBJECT ERROR");
+      //console.log("NOt OBJECT ERROR");
       return reject(new TypeError('Todo is not a valid object.'));
     }
    
-    console.log("BEFORE findOneAndUpdate "+JSON.stringify(params));
+    //console.log("BEFORE findOneAndUpdate "+JSON.stringify(params));
     
     user.findOneAndUpdate(
         params.user.email,
@@ -37,12 +37,9 @@ userSchema.statics.createNew = (params) => {
         { upsert: true },
         (err, saved) => {
              if(err) reject(err)
-              
-              console.log("ONTO findOneAndUpdate "+JSON.stringify(saved));
-              
-              resolve(saved);
-
+              //console.log("ONTO findOneAndUpdate "+JSON.stringify(saved));
               userLinkToGym(params.id, saved);
+              resolve(saved);
     });
 
   });
@@ -89,7 +86,7 @@ userSchema.statics.upload = (file, data) => {
     _gym.insertFile(file, data)
       .then(resp => {
         //console.log(resp);
-        insertFromFile(file.path, data, resolve, reject);
+        insertFromFile(file.path, data);//, resolve, reject);
         resolve(resp);
       })
       .catch(error => {
@@ -100,13 +97,14 @@ userSchema.statics.upload = (file, data) => {
   });//end promise
 }
 
-function insertFromFile(file, id, resolve, reject) {
+function insertFromFile(file, id) {//, resolve, reject) {
   fs.readFile(file, 'utf8', (err, data) => {
       if (err) throw err;
      
         var _data = JSON.parse(data);
-        console.log(_data.length);
+        //console.log(_data.length);
         for (var i = 0, len = _data.length; i < len; i++) {
+
           user.findOneAndUpdate(
             //{"email":_data[i].email},
             {"id":_data[i].id},
@@ -116,18 +114,29 @@ function insertFromFile(file, id, resolve, reject) {
               if(err) console.log(err)//reject(err)
 
               if(userUpdated){
-                _gym.findOneAndUpdate(
-                  id,
-                  { $addToSet: { users: userUpdated } },
-                   (err, gymUpdated) => {
-                      if(err) console.log(err)//reject(err)
 
-                      userUpdated.gyms.addToSet(gymUpdated);
-                      userUpdated.save();
+                setTimeout(() => {
 
-                   });
+                  _gym.findOneAndUpdate(
+                    id,
+                    { $addToSet: { users: userUpdated } },
+                    (err, gymUpdated) => {
+                        if(err) console.log(err)//reject(err)
+                        
+                        try {
+                          userUpdated.gyms.addToSet(gymUpdated);
+                          userUpdated.save();
+                        }catch(error){
+                          console.log(error);
+                        }
+
+                    });
+            
+                }, 100);
+                
               }                 
-            });
+            });            
+
         }
 
       /*

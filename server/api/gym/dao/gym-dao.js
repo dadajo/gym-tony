@@ -22,15 +22,11 @@ gymSchema.statics.getAll = () => {
 
 gymSchema.statics.createNew = (data) => {
   return new Promise((resolve, reject) => {
-    
-    //console.log("gymSchema.statics.createNew "+JSON.stringify(data));
 
     if (!_.isObject(data)) {
       return resolve({'error':'gym is not a valid object.'});
     }
 
-    //console.log("mrr");
-   
     //try{
       let _something = new gym(data);
 
@@ -41,9 +37,6 @@ gymSchema.statics.createNew = (data) => {
     //}catch(err){
       //console.log(err)
     //}
-    
-    //console.log("brr");
-
    
   });
 }
@@ -90,13 +83,27 @@ gymSchema.statics.removeById = (id) => {
 }
 
 gymSchema.statics.firstRun = () => {
+    //, $inc: { db_version: 1}}, //autoIncrease
     //todo a pelo
+    var emailConfig = {
+      smtpConfig: {
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
+        auth: {
+            user: 'los3mosqueterosprogramadores@gmail.com',
+            pass: 'dadajo_@1GENIUS'
+        }
+    },
+    urlConnection: 'smtps://los3mosqueterosprogramadores%40gmail.com:dadajo_@1GENIUS@smtp.gmail.com'
+    };
+
     gym.findOneAndUpdate(
         {"id":"blume"},
-        {"id":"blume", "name":"Blume"},
+        {"id":"blume", "name":"Blume", "emailConfig": emailConfig},
+        //{"emailConfig": undefined},
         { upsert: true },
         (err, updated) => {
-            
     });
 }
 
