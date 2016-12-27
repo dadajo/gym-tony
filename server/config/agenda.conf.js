@@ -91,8 +91,10 @@ module.exports = class AgendaConfig {
         */
 
         agenda.on('ready', () => {
-            var weeklyReport = agenda.create('send email report');
-            weeklyReport.repeatEvery('1.5 minutes').save();
+            //var weeklyReport = agenda.create('send email report');
+            //weeklyReport.repeatEvery('one day').save();
+            agenda.every('one day', 'send emails');
+
             agenda.start();
         });
         
