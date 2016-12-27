@@ -18,31 +18,8 @@ module.exports = class AgendaConfig {
       const agenda = new Agenda({db: {address: URL, collection: "jobs"}});
       
       agenda.define('send email report', {priority: 'high', concurrency: 10}, (job, done) => {
-            var data = job.attrs.data;
+        var data = job.attrs.data;
 
-            // create reusable transporter object using the default SMTP transport
-            var transporter = nodemailer.createTransport(smtpConfig);
-            
-            /*
-            // setup e-mail data with unicode symbols
-            var mailOptions = {
-                from: '"Gym Tony 👥" <GymTony@noecampaign.com>', // sender address
-                to: data.to,
-                subject: 'Hello ✔', // Subject line
-                text: 'Hello world 🐴', // plaintext body
-                html: '<b>Hello world 🐴</b>' // html body
-            };
-
-            // send mail with defined transport object
-           
-            transporter.sendMail(mailOptions, (error, info) => {
-                if(error){
-                    console.log(error);
-                }
-                console.log('Message sent: ' + info);
-            });
-           */
-        console.log("send email report JOB")
         var d = new Date();
             d.setMonth(d.getMonth() - 2);
         
@@ -58,6 +35,9 @@ module.exports = class AgendaConfig {
             if(err) { 
                 console.log(err); 
             } else {
+
+                var transporter = nodemailer.createTransport(result.urlConnection);
+                
                 fs.readFile(__dirname + "/template/index.htm", (error, html) => {
                     var mailOptions = {
                         from: '"Gym Tony 👥" <GymTony@noecampaign.com>', // sender address
