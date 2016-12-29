@@ -38,6 +38,8 @@ module.exports = class AgendaConfig {
 
                 var transporter = nodemailer.createTransport(result.urlConnection);
                 
+                console.log("email connection", result.urlConnection);
+
                 fs.readFile(__dirname + "/template/index.htm", (error, html) => {
                     var mailOptions = {
                         from: '"Gym Tony 👥" <GymTony@noecampaign.com>', // sender address
