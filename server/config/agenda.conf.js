@@ -48,11 +48,13 @@ module.exports = class AgendaConfig {
                     for(var _to in result.users) {
                         mailOptions.to = result.users[_to].email;
                         
+                        console.log(mailOptions);
+                        
                         transporter.sendMail(mailOptions, (error, info) => {
                             if(error){
                                 console.log(error);
                             }
-                            console.log('Message sent: ' + info);
+                            console.log('Message sent: ', info);
                         });
                         
                     }
