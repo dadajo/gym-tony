@@ -76,12 +76,12 @@ module.exports = class AgendaConfig {
 
         });
         
-        /*
+        
         agenda.on('ready', () => {
-            agenda.schedule('in 2 minutes', 'send email report', {to: 'uiktiomasfeliz@gmail.com, joseantoniocamposgonzalez@gmail.com, damian_8_8@hotmail.com'});
+            agenda.schedule('in 2 minutes', 'test');
             agenda.start();
         });
-        */
+        
         /*
         agenda.on('ready', () => {
             var weeklyReport = agenda.create('send email report', {to: 'uiktiomasfeliz@gmail.com, joseantoniocamposgonzalez@gmail.com, damian_8_8@hotmail.com'});
