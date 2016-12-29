@@ -17,8 +17,8 @@ module.exports = class AgendaConfig {
 
       const agenda = new Agenda({db: {address: URL, collection: "jobs"}});
       
-      agenda.define('send email report', {priority: 'high', concurrency: 10}, (job, done) => {
-        var data = job.attrs.data;
+      agenda.define('send emails', {priority: 'high', concurrency: 10}, (job, done) => {
+        //var data = job.attrs.data;
 
         var d = new Date();
             d.setMonth(d.getMonth() - 2);
@@ -76,12 +76,12 @@ module.exports = class AgendaConfig {
 
         });
         
-        
+        /*
         agenda.on('ready', () => {
             agenda.schedule('in 2 minutes', 'test');
             agenda.start();
         });
-        
+        */
         /*
         agenda.on('ready', () => {
             var weeklyReport = agenda.create('send email report', {to: 'uiktiomasfeliz@gmail.com, joseantoniocamposgonzalez@gmail.com, damian_8_8@hotmail.com'});
@@ -93,10 +93,10 @@ module.exports = class AgendaConfig {
         agenda.on('ready', () => {
             //var weeklyReport = agenda.create('send email report');
             //weeklyReport.repeatEvery('one day').save();
-            //agenda.every('5 minutes', 'send emails');
-            //agenda.start();
-            var weeklyReport = agenda.create('send email report');
-            weeklyReport.repeatEvery('5 minutes').save();
+            agenda.every('5 minutes', 'send emails');
+            agenda.start();
+            //var weeklyReport = agenda.create('send email report');
+            //weeklyReport.repeatEvery('5 minutes').save();
         });
         
     }
