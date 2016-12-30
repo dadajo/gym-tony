@@ -35,33 +35,31 @@ module.exports = class AgendaConfig {
             if(err) { 
                 console.log(err); 
             } else {
-
-                var transporter = nodemailer.createTransport(result.urlConnection);
+                if(_.isObject(result.users)){
+                    var transporter = nodemailer.createTransport(result.emailConfig.smtpConfig);
                 
-                console.log("email connection", result.urlConnection);
+                    fs.readFile(__dirname + "/template/index.htm", (error, html) => {
+                        var mailOptions = {
+                            from: '"Gym Tony 👥" <'+ result.emailConfig.smtpConfig.auth.user+'>', // sender address
+                            to: undefined,
+                            subject: '¡Ofertón!', // Subject line                        
+                            html: html//'<b>Hello world 🐴</b>' // html body
+                        };
 
-                fs.readFile(__dirname + "/template/index.htm", (error, html) => {
-                    var mailOptions = {
-                        from: '"Gym Tony 👥" <GymTony@noecampaign.com>', // sender address
-                        to: undefined,
-                        subject: '¡Ofertón!', // Subject line                        
-                        html: html//'<b>Hello world 🐴</b>' // html body
-                    };
-                    for(var _to in result.users) {
-                        mailOptions.to = result.users[_to].email;
                         
-                        console.log(mailOptions);
+                        for(var _to in result.users) {
+                            mailOptions.to = result.users[_to].email;
                         
-                        transporter.sendMail(mailOptions, (error, info) => {
-                            if(error){
-                                console.log(error);
-                            }
-                            console.log('Message sent: ', info);
-                        });
+                            transporter.sendMail(mailOptions, (error, info) => {
+                                if(error){
+                                    console.log("Error sendind email: ",error);
+                                }
+                                console.log('Message sent: ', info);
+                            });
+                        }                    
                         
-                    }
-                    
-                });
+                    });
+                }   
             } 
         });
 

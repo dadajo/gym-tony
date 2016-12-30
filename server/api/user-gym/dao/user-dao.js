@@ -98,43 +98,64 @@ userSchema.statics.upload = (file, data) => {
 }
 
 function insertFromFile(file, id) {//, resolve, reject) {
+  //console.log("insertFromFile", id);
   fs.readFile(file, 'utf8', (err, data) => {
       if (err) throw err;
-     
+
+        console.log("Read file");
+
         var _data = JSON.parse(data);
         //console.log(_data.length);
         for (var i = 0, len = _data.length; i < len; i++) {
-
+          
+          console.log("for", i);
+          
           user.findOneAndUpdate(
-            //{"email":_data[i].email},
             {"id":_data[i].id},
-            new user(_data[i]),
-            { upsert: true },
+            _data[i],//new user(_data[i]),//
+            //{ upsert: true },
             (err, userUpdated) => {
               if(err) console.log(err)//reject(err)
+              
+              //console.log("user.findOneAndUpdate");
+              var userToLink;
+              if(_.isEmpty(userUpdated)){
 
-              if(userUpdated){
-
+                userToLink = userUpdated;
+                //userLinkToGym(id, userUpdated);
+                
+                /*
                 setTimeout(() => {
-
+                  
                   _gym.findOneAndUpdate(
                     id,
                     { $addToSet: { users: userUpdated } },
                     (err, gymUpdated) => {
                         if(err) console.log(err)//reject(err)
                         
+                        console.log("_gym.findOneAndUpdate");
+                        
                         try {
                           userUpdated.gyms.addToSet(gymUpdated);
                           userUpdated.save();
                         }catch(error){
-                          console.log(error);
+                          console.log("Error try user.addToSet", error);
                         }
 
                     });
+                    
             
                 }, 100);
-                
-              }                 
+                */
+              }else{
+                userToLink = new user(_data[i]);         
+              }   
+
+              setTimeout(() => {
+                if(userToLink)
+                  userLinkToGym(id, userToLink);   
+              }, 100);
+
             });            
 
         }
