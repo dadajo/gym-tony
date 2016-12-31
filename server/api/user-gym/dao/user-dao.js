@@ -102,26 +102,32 @@ function insertFromFile(file, id) {//, resolve, reject) {
   fs.readFile(file, 'utf8', (err, data) => {
       if (err) throw err;
 
-        console.log("Read file");
+        console.log("Read file", data);
 
-        var _data = JSON.parse(data);
+        let _data = JSON.parse(data);
         //console.log(_data.length);
-        for (var i = 0, len = _data.length; i < len; i++) {
+        for (let i = 0, len = _data.length; i < len; i++) {
           
-          console.log("for", i);
-          
-          user.findOneAndUpdate(
+          user.findOne(
             {"id":_data[i].id},
-            _data[i],//new user(_data[i]),//
+            //_data[i],//new user(_data[i]),//
             //{ upsert: true },
             (err, userUpdated) => {
               if(err) console.log(err)//reject(err)
               
-              //console.log("user.findOneAndUpdate");
-              var userToLink;
-              if(_.isEmpty(userUpdated)){
+               console.log("-_- "+i, _data[i]);
+              //console.log("user.findOneAndUpdate", userUpdated);
+              
+              if(!_.isNull(userUpdated)){
 
-                userToLink = userUpdated;
+                
+                //setTimeout(() => {
+                    if(userUpdated){
+                      userUpdated.lastViewed = _data[i].lastViewed;
+                      userUpdated.save();
+                      userLinkToGym(id, userUpdated);   
+                    }
+                  //}, 100);
                 //userLinkToGym(id, userUpdated);
                 
                 /*
@@ -148,13 +154,19 @@ function insertFromFile(file, id) {//, resolve, reject) {
                 }, 100);
                 */
               }else{
-                userToLink = new user(_data[i]);         
+                console.log("before new user... ", _data[i]);
+                let userToLink = new user(_data[i]);    
+                userToLink.save((err, saved) => {
+                  console.log("userToLink ", saved);
+                  //setTimeout(() => {
+                    if(saved)
+                      userLinkToGym(id, saved);   
+                  //}, 100);
+                });
               }   
+              //console.log("track", userToLink)
 
-              setTimeout(() => {
-                if(userToLink)
-                  userLinkToGym(id, userToLink);   
-              }, 100);
+              
 
             });            
 

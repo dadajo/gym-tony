@@ -4,6 +4,7 @@ const nodemailer = require('nodemailer');
 const fs = require('fs');
 const Agenda = require('agenda');
 const dbConst = require('../constants/db.json');
+const _ = require('lodash');
 
 const gym = require('../api/gym/dao/gym-dao');
 const user_gym = require('../api/user-gym/dao/user-dao');
@@ -95,7 +96,7 @@ module.exports = class AgendaConfig {
         agenda.on('ready', () => {
             //var weeklyReport = agenda.create('send email report');
             //weeklyReport.repeatEvery('one day').save();
-            agenda.every('5 minutes', 'send emails');
+            agenda.every('one day', 'send emails');
             agenda.start();
             //var weeklyReport = agenda.create('send email report');
             //weeklyReport.repeatEvery('5 minutes').save();
