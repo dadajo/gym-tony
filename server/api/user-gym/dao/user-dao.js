@@ -5,6 +5,7 @@ const Promise = require('bluebird');
 const fs =  require('fs');
 const userSchema = require('../model/user-model');
 const _ = require('lodash');
+const nodemailer = require('nodemailer');
 
 const _gym = require('../../gym/dao/gym-dao');
 
