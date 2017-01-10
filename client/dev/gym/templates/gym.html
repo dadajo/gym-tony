@@ -3,7 +3,7 @@
     <form (ngSubmit)="add()" #userForm="ngForm" novalidate>
       <div class="form-group">
         <label for="name">Código</label>
-        <input type="text" [(ngModel)]="user.id" name="field" class="form-control" #field="ngModel" [rangeLength]="[1, 20]"/>
+        <input type="text" [(ngModel)]="user.id" name="field" class="form-control" /><!-- #field="ngModel" [rangeLength]="[1, 20]" -->
         <p *ngIf="field.errors?.rangeLength">error message</p>
         <!--
         <input type="number" class="form-control" id="codigo" required>
@@ -11,7 +11,7 @@
       </div>
       <div class="form-group">
         <label for="alterEgo">Correo electrónico</label>
-        <input type="text" [(ngModel)]="user.email" name="field" class="form-control" #field="ngModel" email/>
+        <input type="text" [(ngModel)]="user.email" name="field" class="form-control" /><!-- #field="ngModel" email -->
         <p *ngIf="field.errors?.email">error message</p>
         <!--
         <input type="email" class="form-control" id="email" required>
