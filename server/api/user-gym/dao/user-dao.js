@@ -32,7 +32,7 @@ userSchema.statics.createNew = (params) => {
     console.log("userSchema.statics.createNew ",params);
     
     user.findOneAndUpdate(
-        params.user.email,
+        {email: params.user.email},
         params.user,
         //{ $push: { replies: reply } },
         { upsert: true },
