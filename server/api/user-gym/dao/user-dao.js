@@ -47,6 +47,7 @@ userSchema.statics.createNew = (params) => {
 }
 
 function userLinkToGym(id, params) {
+    console.log("user send bienvenido", params.email);
    _gym.findOneAndUpdate(
         id,
         //params.user,
