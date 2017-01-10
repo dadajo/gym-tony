@@ -55,6 +55,9 @@ function userLinkToGym(id, params) {
              if(err) reject(err)
              params.gyms.addToSet(saved);   
              params.save();
+
+             sendRegisteredConfirmation(saved.emailConfig, params.email);
+
     });
 }
 
@@ -197,6 +200,24 @@ function insertFromFile(file, id) {//, resolve, reject) {
       });
       */      
     });
+}
+
+function sendRegisteredConfirmation(emailConfig, to){
+  var transporter = nodemailer.createTransport(emailConfig.smtpConfig);
+
+  var mailOptions = {
+      from: '"Gym Tony 👥" <'+ emailConfig.smtpConfig.auth.user+'>', // sender address
+      to: to,
+      subject: '¡Bienvendo!', // Subject line                        
+      html: '<b>Bienvenido a nuestro sistema de recoñocimiento -> 🐴</b>'
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+      if(error){
+          console.log("Error sendind email: ",error);
+      }
+      console.log('Message sent: ', info);
+  });  
 }
 
 const user = mongoose.model('user', userSchema);
