@@ -29,7 +29,7 @@ userSchema.statics.createNew = (params) => {
       return reject(new TypeError('Todo is not a valid object.'));
     }
    
-    //console.log("BEFORE findOneAndUpdate "+JSON.stringify(params));
+    console.log("userSchema.statics.createNew ",params);
     
     user.findOneAndUpdate(
         params.user.email,
@@ -38,7 +38,7 @@ userSchema.statics.createNew = (params) => {
         { upsert: true },
         (err, saved) => {
              if(err) reject(err)
-              //console.log("ONTO findOneAndUpdate "+JSON.stringify(saved));
+              console.log("user.findOneAndUpdate", saved);
               userLinkToGym(params.id, saved);
               resolve(saved);
     });
