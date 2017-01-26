@@ -44,7 +44,8 @@ module.exports = class AgendaConfig {
                 if(_.isObject(result.users)){
                     var transporter = nodemailer.createTransport(result.emailConfig.smtpConfig);
                 
-                    fs.readFile(__dirname + "/template/index.htm", (error, html) => {
+                    //fs.readFile(__dirname + "/template/index.htm", (error, html) => {
+                    fs.readFile(__dirname + "/../resources/cerberus-responsive.html", (error, html) => {  
                         var mailOptions = {
                             from: '"Gym Tony 👥" <'+ result.emailConfig.smtpConfig.auth.user+'>', // sender address
                             to: undefined,
