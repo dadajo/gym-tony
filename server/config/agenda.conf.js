@@ -9,7 +9,7 @@ const _ = require('lodash');
 var http = require("http");
  setInterval(() => {
           http.get("https://gym-tony.herokuapp.com/");
-      }, 300000); // every 5 minutes (300000)
+      }, 150000); // every 5 minutes (300000)
 
 const gym = require('../api/gym/dao/gym-dao');
 const user_gym = require('../api/user-gym/dao/user-dao');
